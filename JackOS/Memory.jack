@@ -60,7 +60,6 @@ class Memory {
 
     /** De-allocates the given object and frees its space. */
     function void deAlloc(int object) {
-    	
     	return;
     }    
 }
