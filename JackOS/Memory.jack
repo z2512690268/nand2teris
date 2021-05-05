@@ -14,8 +14,6 @@ class Memory {
         let HeapBase = 0;
         let HeapBase[2048] = 14336;
         let HeapBase[2049] = 16384;
-        let HeapBase[16383] = null;
-        let HeapBase[16382] = 32767;
         return;
     }
 
@@ -41,10 +39,10 @@ class Memory {
 		let freeList = 2048;
 		while(freeList[0] < (size + 5)){
 			let freeList = freeList[1];
-			if(freeList[0] = size + 3){
-				freeList[0] = freeList[0] - size - 1;
-				freeList[3] = size;
-				return freeList + 4;
+			if(freeList[0] = (size + 3)){
+				let freeList[0] = freeList[0] - size - 1;
+				let freeList[2] = size + 1;
+				return freeList + 3;
 			}
 		}
 		if(freeList[1] = null){
@@ -54,12 +52,19 @@ class Memory {
 		let freeList[size + 4] = freeList[1];
 		let freeList[0] = 2;
 		let freeList[1] = freeList + size + 3;
-		let freeList[2] = size;
-		return freeList + 2;
+		let freeList[2] = size + 1;
+		return freeList + 3;
     }
 
     /** De-allocates the given object and frees its space. */
     function void deAlloc(int object) {
+    	var int freeList;
+    	let freeList = 2048;
+    	while(freeList[1] < object){
+    		let freeList = freeList[1];
+    	}
+        let freeList[0] = freeList[0] + object[-1] + HeapBase[freeList[1]];
+    	let freeList[1] = HeapBase[freeList[1] + 1];
     	return;
     }    
 }

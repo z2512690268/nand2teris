@@ -1,0 +1,124 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Math.jack
+
+/**
+ * A basic math library.
+ */
+class Math {
+
+    static Array MaskArray;
+    /** Initializes the library. */
+    function void init() {
+        var int mask, cnt;
+        let MaskArray = Array.new(16);
+        let mask = 1;
+        let cnt = 0;
+        while(cnt < 15){
+            let MaskArray[cnt] = mask;
+            let cnt = cnt + 1;
+            let mask = mask + mask;
+        }
+        let MaskArray[15] = ~32767;
+        return;        
+    }
+
+    /** Returns the absolute value of x. */
+    function int abs(int x) {
+        if(x < 0){
+            let x = -x;
+        }
+        return x;
+    }
+
+    /** Returns the product of x and y. */
+    //执行复杂度为两个参数的最高非零位数
+    function int multiply(int x, int y) {
+        var int sum, cnt, flag, temp;
+        let sum = 0;
+        let cnt = 0;
+        let flag = ( (x < 0) & (y > 0) ) | ( (x > 0) & (y < 0) );
+        let x = Math.abs(x);
+        let y = Math.abs(y);
+        if(x < y){
+            let temp = x;
+            let x = y;
+            let y = temp;
+        }
+        // 用于提升效率，若生成代码过多可以删去
+        while(~(MaskArray[cnt] > y) & (cnt < 15)){
+            if(MaskArray[cnt] & y){
+                let sum = sum + x;
+            }
+            let x = x + x;
+            let cnt = cnt + 1;
+        }
+        if(flag){
+            return -sum;
+        }
+        return sum;
+    }
+
+    /** Returns the integer part of x/y. */
+    function int divide(int x, int y) {
+        var int part, res;
+        var int flag;
+        let flag = ( (x < 0) & (y > 0) ) | ( (x > 0) & (y < 0) );
+        if(y = 0){
+            do Sys.error(1);
+        }
+        let x = Math.abs(x);
+        let y = Math.abs(y);
+        if(x < y)  {
+            return 0;
+        }
+        let part = x / (y * 2);
+        if((x - (part * y * 2)) < y){
+            let res = part * 2;
+        }
+        else{
+            let res = (part * 2) + 1;
+        }
+        if(flag){
+            return -res;
+        }
+        return res;
+    }
+
+    /** Returns the integer part of the square root of x. */
+    function int sqrt(int x) {
+        var int res, cnt, temp, mul;
+        let res = 0;
+        let cnt = 7;
+        if(x < 0){
+            do Sys.error(0);
+        }
+        while(cnt > -1){
+            let temp = res + MaskArray[cnt];
+            let mul = temp * temp;
+            if((~(mul > x)) & (~(mul < 0))){
+                let res = temp;
+            }
+            let cnt = cnt - 1;
+        }
+        return res;
+    }
+
+    /** Returns the greater number. */
+    function int max(int a, int b) {
+        if(a < b){
+            return b;
+        }
+        return a;
+    }
+
+    /** Returns the smaller number. */
+    function int min(int a, int b) {
+        if(a < b){
+            return a;
+        }   
+        return b;
+    }
+
+}

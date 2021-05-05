@@ -1,0 +1,131 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/String.jack
+
+/**
+ * Represents a String object. Implements the String type.
+ */
+class String {
+    field Array StringArray;
+    field int StringLength;
+    field int MaxLength;
+
+    /** Constructs a new empty String with a maximum length of maxLength. */
+    constructor String new(int maxLength) {
+        let StringLength = 0;
+        let MaxLength = maxLength;
+        if(maxLength = 0){
+            return this;
+        }
+        let StringArray = Memory.alloc(maxLength);
+        return this;
+    }
+
+    /** De-allocates the string and frees its space. */
+    method void dispose() {
+        if(MaxLength = 0){
+            return;
+        }
+        do Memory.deAlloc(StringArray);
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    /** Returns the current length of this String. */
+    method int length() {
+        return StringLength;
+    }
+
+    /** Returns the character at location j. */
+    method char charAt(int j) {
+        return StringArray[j];
+    }
+
+    /** Sets the j'th character of this string to be c. */
+    method void setCharAt(int j, char c) {
+        let StringArray[j] = c;
+        return;
+    }
+
+    /** Appends the character c to the end of this String.
+     *  Returns this string as the return value. */
+    method String appendChar(char c) {
+        if(~(StringLength < MaxLength)){
+            do Sys.error(3);
+        }
+        let StringArray[StringLength] = c;
+        let StringLength = StringLength + 1;
+        return this;
+    }
+
+    /** Erases the last character from this String. */
+    method void eraseLastChar() {
+        if(StringLength = 0){
+            do Sys.error(7);
+        }
+        let StringLength = StringLength - 1;
+        return;
+    }
+
+    /** Returns the integer value of this String until the first non
+     *  numeric character. */
+    method int intValue() {
+        var int sum, i, flag;
+        let sum = 0;
+        let i = 0;
+        let flag = 0;
+        if(charAt(0) = 45){
+            let flag = -1;
+            let i = i + 1;
+        }
+        while( (~(StringArray[i] < 48)) & (~(StringArray[i] > 57)) & (i < StringLength) ){
+            let sum = sum * 10 + StringArray[i] - 48;
+            let i = i + 1;
+        }
+        if(flag){
+            return -sum;
+        }
+        return sum;
+    }
+
+    /** Sets this String to hold a representation of the given number. */
+    method void setInt(int number) {
+        var int temp, left;
+        let StringLength = 0;
+        if((number < 0) & (number > -10)){
+            do appendChar(45);
+            do appendChar(-number + 48);
+            return;
+        }
+        if(number = 0){
+            return;
+        }
+        let left = number / 10;
+        do setInt(left);
+        let temp = number - (left * 10);
+        if(temp > 0){
+            do appendChar(temp + 48);
+        }
+        else{
+            do appendChar(-temp + 48);
+        }
+        let number = left;   
+        return;
+    }
+
+    /** Returns the new line character. */
+    function char newLine() {
+        return 128;
+    }
+
+    /** Returns the backspace character. */
+    function char backSpace() {
+        return 129;
+    }
+
+    /** Returns the double quote (") character. */
+    function char doubleQuote() {
+        return 34;
+    }
+}

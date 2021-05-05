@@ -1,0 +1,533 @@
+//class Screen  { 
+//    static Array MaskArray ; 
+//    static boolean NowColor ; 
+//    static int ScreenBase ; 
+//    function void init (  )   { 
+//        var int mask ,  cnt ; 
+//        let MaskArray  =  Array . new ( 16 )  ; 
+function Screen.init 2
+push constant 16
+call Array.new 1
+pop static 0
+//        let mask  =  1 ; 
+push constant 1
+pop local 0
+//        let cnt  =  0 ; 
+push constant 0
+pop local 1
+//        while ( cnt  <  15 )  { 
+label WHILE_EXP0
+push local 1
+push constant 15
+lt
+not
+//            let MaskArray [ cnt ]   =  mask ; 
+if-goto WHILE_END0
+push static 0
+push local 1
+add
+pop temp 1
+push local 0
+push temp 1
+pop pointer 1
+pop that 0
+//            let cnt  =  cnt  +  1 ; 
+push local 1
+push constant 1
+add
+pop local 1
+//            let mask  =  mask  +  mask ; 
+push local 0
+push local 0
+add
+pop local 0
+//         } 
+goto WHILE_EXP0
+label WHILE_END0
+//        let MaskArray [ 15 ]   =   ~ 32767 ; 
+push static 0
+push constant 15
+add
+pop temp 1
+push constant 32767
+not
+push temp 1
+pop pointer 1
+pop that 0
+//        let ScreenBase  =  16384 ; 
+push constant 16384
+pop static 2
+//        let NowColor  =  true ; 
+push constant 1
+neg
+pop static 1
+//        return ;         
+push constant 0
+return
+//     } 
+//    function void clearScreen (  )   { 
+//        var int i ; 
+//        let i  =  0 ; 
+function Screen.clearScreen 1
+push constant 0
+pop local 0
+//        while ( i  <  8192 )  { 
+label WHILE_EXP1
+push local 0
+push constant 8192
+lt
+not
+//            let ScreenBase [ i ]   =  0 ; 
+if-goto WHILE_END1
+push static 2
+push local 0
+add
+pop temp 1
+push constant 0
+push temp 1
+pop pointer 1
+pop that 0
+//            let i  =  i  +  1 ; 
+push local 0
+push constant 1
+add
+pop local 0
+//         } 
+goto WHILE_EXP1
+label WHILE_END1
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void setColor ( boolean b )   { 
+//        let NowColor  =  b ; 
+function Screen.setColor 0
+push argument 0
+pop static 1
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void drawPixel ( int x ,  int y )   { 
+//        var int ScreenPos ,  left ; 
+//        let left  =  x  /  16 ; 
+function Screen.drawPixel 2
+push argument 0
+push constant 16
+call Math.divide 2
+pop local 1
+//        let ScreenPos  =   ( y  *  32 )   +  left ; 
+push argument 1
+push constant 32
+call Math.multiply 2
+push local 1
+add
+pop local 0
+//        if ( NowColor )  { 
+push static 1
+//            let ScreenBase [ ScreenPos ]   =  ScreenBase [ ScreenPos ]   |   ( MaskArray [ x  -   ( left  *  16 )  ]  )  ;  
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push static 2
+push local 0
+add
+pop temp 1
+push static 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 0
+push argument 0
+push local 1
+push constant 16
+call Math.multiply 2
+sub
+add
+pop pointer 1
+push that 0
+or
+push temp 1
+pop pointer 1
+pop that 0
+//         } 
+//        else { 
+goto IF_END0
+label IF_FALSE0
+//            let ScreenBase [ ScreenPos ]   =  ScreenBase [ ScreenPos ]   &   (  ~ MaskArray [ x  -   ( left  *  16 )  ]  )  ; 
+push static 2
+push local 0
+add
+pop temp 1
+push static 2
+push local 0
+add
+pop pointer 1
+push that 0
+push static 0
+push argument 0
+push local 1
+push constant 16
+call Math.multiply 2
+sub
+add
+pop pointer 1
+push that 0
+not
+and
+push temp 1
+pop pointer 1
+pop that 0
+//         } 
+label IF_END0
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void drawLine ( int x1 ,  int y1 ,  int x2 ,  int y2 )   { 
+//        var int dx ,  dy ; 
+//        var int adyminusbdx ; 
+//        var int Int16X1 ,  Int16X2 ; 
+//        var int DireFlag ,  DrawFlag ; 
+//        var int DeltaX ,  DeltaY ,  DeltaDx ,  DeltaDy ; 
+//        let dx  =  x2  -  x1 ; 
+function Screen.drawLine 11
+push argument 2
+push argument 0
+sub
+pop local 0
+//        let dy  =  y2  -  y1 ; 
+push argument 3
+push argument 1
+sub
+pop local 1
+//        do Screen . drawPixel ( x1 ,  y1 )  ; 
+push argument 0
+push argument 1
+call Screen.drawPixel 2
+pop temp 0
+//        if (  ( dy  =  0 )   &   ( dx  >  16 )  )  { 
+push local 1
+push constant 0
+eq
+push local 0
+push constant 16
+gt
+and
+//            let Int16X1  =   (  ( x1  /  16 )   *  16 )  ; 
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push argument 0
+push constant 16
+call Math.divide 2
+push constant 16
+call Math.multiply 2
+pop local 3
+//            let Int16X2  =   (  ( x2  /  16 )   *  16 )  ; 
+push argument 2
+push constant 16
+call Math.divide 2
+push constant 16
+call Math.multiply 2
+pop local 4
+//            if (  ~  ( Int16X1  =  x1 )  )  { 
+push local 3
+push argument 0
+eq
+not
+//                while (  ~  ( x1  =   ( Int16X1  +  16 )  )  )  { 
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+label WHILE_EXP2
+push argument 0
+push local 3
+push constant 16
+add
+eq
+not
+not
+//                    let x1  =  x1  +  1 ; 
+if-goto WHILE_END2
+push argument 0
+push constant 1
+add
+pop argument 0
+//                    do Screen . drawPixel ( x1 ,  y1 )  ; 
+push argument 0
+push argument 1
+call Screen.drawPixel 2
+pop temp 0
+//                 } 
+goto WHILE_EXP2
+label WHILE_END2
+//             } 
+//            while ( x1  <  Int16X2 )  { 
+label IF_FALSE2
+label WHILE_EXP3
+push argument 0
+push local 4
+lt
+not
+//                let ScreenBase [  ( y1  *  32 )   +   ( x1  /  16 )  ]   =  NowColor ; 
+if-goto WHILE_END3
+push static 2
+push argument 1
+push constant 32
+call Math.multiply 2
+push argument 0
+push constant 16
+call Math.divide 2
+add
+add
+pop temp 1
+push static 1
+push temp 1
+pop pointer 1
+pop that 0
+//                let x1  =  x1  +  16 ; 
+push argument 0
+push constant 16
+add
+pop argument 0
+//             } 
+goto WHILE_EXP3
+label WHILE_END3
+//            do Screen . drawPixel ( x1 ,  y1 )  ; 
+push argument 0
+push argument 1
+call Screen.drawPixel 2
+pop temp 0
+//         } 
+//        let DeltaX  =  1 ; 
+label IF_FALSE1
+push constant 1
+pop local 7
+//        let DeltaDy  =  dy ; 
+push local 1
+pop local 10
+//        let DeltaY  =  1 ; 
+push constant 1
+pop local 8
+//        let DeltaDx  =   - dx ; 
+push local 0
+neg
+pop local 9
+//        if ( dx  <  0 )  { 
+push local 0
+push constant 0
+lt
+//            let DeltaX  =   - 1 ; 
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 1
+neg
+pop local 7
+//            let DeltaDy  =   - dy ; 
+push local 1
+neg
+pop local 10
+//         } 
+//        if ( dy  <  0 )  { 
+label IF_FALSE3
+push local 1
+push constant 0
+lt
+//            let DeltaY  =   - 1 ; 
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 1
+neg
+pop local 8
+//            let DeltaDx  =  dx ; 
+push local 0
+pop local 9
+//         }         
+//        let DireFlag  =   (  ( dx  >  0 )   &   ( dy  <  0 )  )   |   (  ( dx  <  0 )   &   ( dy  >  0 )  )  ; 
+label IF_FALSE4
+push local 0
+push constant 0
+gt
+push local 1
+push constant 0
+lt
+and
+push local 0
+push constant 0
+lt
+push local 1
+push constant 0
+gt
+and
+or
+pop local 5
+//        while (  ~  ( x1  =  x2 )   |   ~  ( y1  =  y2 )  )  { 
+label WHILE_EXP4
+push argument 0
+push argument 2
+eq
+not
+push argument 1
+push argument 3
+eq
+not
+or
+not
+//            let DrawFlag  =   (  (  (  ( adyminusbdx  <  0 )   &   ~ DireFlag )   |   (  ( adyminusbdx  >  0 )   &  DireFlag )  )  )  ; 
+if-goto WHILE_END4
+push local 2
+push constant 0
+lt
+push local 5
+not
+and
+push local 2
+push constant 0
+gt
+push local 5
+and
+or
+pop local 6
+//            if  (  ( DrawFlag  |   ( dy  =  0 )  )   &   ~  ( dx  =  0 )  )  { 
+push local 6
+push local 1
+push constant 0
+eq
+or
+push local 0
+push constant 0
+eq
+not
+and
+//                let x1  =  x1  +  DeltaX ; 
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push argument 0
+push local 7
+add
+pop argument 0
+//                let adyminusbdx  =  adyminusbdx  +  DeltaDy ; 
+push local 2
+push local 10
+add
+pop local 2
+//                do Screen . drawPixel ( x1 ,  y1 )  ; 
+push argument 0
+push argument 1
+call Screen.drawPixel 2
+pop temp 0
+//             } 
+//            else { 
+goto IF_END5
+label IF_FALSE5
+//                let y1  =  y1  +  DeltaY ; 
+push argument 1
+push local 8
+add
+pop argument 1
+//                let adyminusbdx  =  adyminusbdx  +  DeltaDx ; 
+push local 2
+push local 9
+add
+pop local 2
+//                do Screen . drawPixel ( x1 ,  y1 )  ; 
+push argument 0
+push argument 1
+call Screen.drawPixel 2
+pop temp 0
+//             } 
+label IF_END5
+//         } 
+goto WHILE_EXP4
+label WHILE_END4
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void drawRectangle ( int x1 ,  int y1 ,  int x2 ,  int y2 )   { 
+//        while (  ~  ( y1  =  y2 )  )  { 
+function Screen.drawRectangle 0
+label WHILE_EXP5
+push argument 1
+push argument 3
+eq
+not
+not
+//            do Screen . drawLine ( x1 ,  y1 ,  x2 ,  y1 )  ; 
+if-goto WHILE_END5
+push argument 0
+push argument 1
+push argument 2
+push argument 1
+call Screen.drawLine 4
+pop temp 0
+//            let y1  =  y1  +  1 ; 
+push argument 1
+push constant 1
+add
+pop argument 1
+//         } 
+goto WHILE_EXP5
+label WHILE_END5
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void drawCircle ( int cx ,  int cy ,  int r )   { 
+//        var int dy ,  Sqrt ; 
+//        let dy  =   - r ; 
+function Screen.drawCircle 2
+push argument 2
+neg
+pop local 0
+//        while (  ~  ( dy  =  r )  )  { 
+label WHILE_EXP6
+push local 0
+push argument 2
+eq
+not
+not
+//            let Sqrt  =  Math . sqrt (  ( r  *  r )   -   ( dy  *  dy )  )  ; 
+if-goto WHILE_END6
+push argument 2
+push argument 2
+call Math.multiply 2
+push local 0
+push local 0
+call Math.multiply 2
+sub
+call Math.sqrt 1
+pop local 1
+//            do Screen . drawLine ( cx  -  Sqrt ,  cy  +  dy ,  cx  +  Sqrt ,  cy  +  dy )  ; 
+push argument 0
+push local 1
+sub
+push argument 1
+push local 0
+add
+push argument 0
+push local 1
+add
+push argument 1
+push local 0
+add
+call Screen.drawLine 4
+pop temp 0
+//            let dy  =  dy  +  1 ; 
+push local 0
+push constant 1
+add
+pop local 0
+//         } 
+goto WHILE_EXP6
+label WHILE_END6
+//        return ; 
+push constant 0
+return
+//     } 
+// } 

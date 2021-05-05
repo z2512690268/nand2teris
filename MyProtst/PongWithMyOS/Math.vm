@@ -1,0 +1,439 @@
+//class Math  { 
+//    static Array MaskArray ; 
+//    function void init (  )   { 
+//        var int mask ,  cnt ; 
+//        let MaskArray  =  Array . new ( 16 )  ; 
+function Math.init 2
+push constant 16
+call Array.new 1
+pop static 0
+//        let mask  =  1 ; 
+push constant 1
+pop local 0
+//        let cnt  =  0 ; 
+push constant 0
+pop local 1
+//        while ( cnt  <  15 )  { 
+label WHILE_EXP0
+push local 1
+push constant 15
+lt
+not
+//            let MaskArray [ cnt ]   =  mask ; 
+if-goto WHILE_END0
+push static 0
+push local 1
+add
+pop temp 1
+push local 0
+push temp 1
+pop pointer 1
+pop that 0
+//            let cnt  =  cnt  +  1 ; 
+push local 1
+push constant 1
+add
+pop local 1
+//            let mask  =  mask  +  mask ; 
+push local 0
+push local 0
+add
+pop local 0
+//         } 
+goto WHILE_EXP0
+label WHILE_END0
+//        let MaskArray [ 15 ]   =   ~ 32767 ; 
+push static 0
+push constant 15
+add
+pop temp 1
+push constant 32767
+not
+push temp 1
+pop pointer 1
+pop that 0
+//        return ;         
+push constant 0
+return
+//     } 
+//    function int abs ( int x )   { 
+//        if ( x  <  0 )  { 
+function Math.abs 0
+push argument 0
+push constant 0
+lt
+//            let x  =   - x ; 
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 0
+neg
+pop argument 0
+//         } 
+//        return x ; 
+label IF_FALSE0
+push argument 0
+return
+//     } 
+//    function int multiply ( int x ,  int y )   { 
+//        var int sum ,  cnt ,  flag ,  temp ; 
+//        let sum  =  0 ; 
+function Math.multiply 4
+push constant 0
+pop local 0
+//        let cnt  =  0 ; 
+push constant 0
+pop local 1
+//        let flag  =   (   ( x  <  0 )   &   ( y  >  0 )   )   |   (   ( x  >  0 )   &   ( y  <  0 )   )  ; 
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+gt
+and
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+lt
+and
+or
+pop local 2
+//        let x  =  Math . abs ( x )  ; 
+push argument 0
+call Math.abs 1
+pop argument 0
+//        let y  =  Math . abs ( y )  ; 
+push argument 1
+call Math.abs 1
+pop argument 1
+//        if ( x  <  y )  { 
+push argument 0
+push argument 1
+lt
+//            let temp  =  x ; 
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push argument 0
+pop local 3
+//            let x  =  y ; 
+push argument 1
+pop argument 0
+//            let y  =  temp ; 
+push local 3
+pop argument 1
+//         } 
+//        while (  ~  ( MaskArray [ cnt ]   >  y )   &   ( cnt  <  15 )  )  { 
+label IF_FALSE1
+label WHILE_EXP1
+push static 0
+push local 1
+add
+pop pointer 1
+push that 0
+push argument 1
+gt
+not
+push local 1
+push constant 15
+lt
+and
+not
+//            if ( MaskArray [ cnt ]   &  y )  { 
+if-goto WHILE_END1
+push static 0
+push local 1
+add
+pop pointer 1
+push that 0
+push argument 1
+and
+//                let sum  =  sum  +  x ; 
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+push argument 0
+add
+pop local 0
+//             } 
+//            let x  =  x  +  x ; 
+label IF_FALSE2
+push argument 0
+push argument 0
+add
+pop argument 0
+//            let cnt  =  cnt  +  1 ; 
+push local 1
+push constant 1
+add
+pop local 1
+//         } 
+goto WHILE_EXP1
+label WHILE_END1
+//        if ( flag )  { 
+push local 2
+//            return  - sum ; 
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push local 0
+neg
+return
+//         } 
+//        return sum ; 
+label IF_FALSE3
+push local 0
+return
+//     } 
+//    function int divide ( int x ,  int y )   { 
+//        var int part ,  res ; 
+//        var int flag ; 
+//        let flag  =   (   ( x  <  0 )   &   ( y  >  0 )   )   |   (   ( x  >  0 )   &   ( y  <  0 )   )  ; 
+function Math.divide 3
+push argument 0
+push constant 0
+lt
+push argument 1
+push constant 0
+gt
+and
+push argument 0
+push constant 0
+gt
+push argument 1
+push constant 0
+lt
+and
+or
+pop local 2
+//        if ( y  =  0 )  { 
+push argument 1
+push constant 0
+eq
+//            do Sys . error ( 1 )  ; 
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 1
+call Sys.error 1
+pop temp 0
+//         } 
+//        let x  =  Math . abs ( x )  ; 
+label IF_FALSE4
+push argument 0
+call Math.abs 1
+pop argument 0
+//        let y  =  Math . abs ( y )  ; 
+push argument 1
+call Math.abs 1
+pop argument 1
+//        if ( x  <  y )  { 
+push argument 0
+push argument 1
+lt
+//            return 0 ; 
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push constant 0
+return
+//         } 
+//        if ( y  +  y  <  0 )  { 
+label IF_FALSE5
+push argument 1
+push argument 1
+add
+push constant 0
+lt
+//            if ( x  <  y )  { 
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push argument 0
+push argument 1
+lt
+//                return 0 ; 
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 0
+return
+//             } 
+//            else { 
+goto IF_END7
+label IF_FALSE7
+//                return 1 ; 
+push constant 1
+return
+//             } 
+label IF_END7
+//         } 
+//        let part  =  x  /   ( y  *  2 )  ; 
+label IF_FALSE6
+push argument 0
+push argument 1
+push constant 2
+call Math.multiply 2
+call Math.divide 2
+pop local 0
+//        if (  ( x  -   ( part  *  y  *  2 )  )   <  y )  { 
+push argument 0
+push local 0
+push argument 1
+call Math.multiply 2
+push constant 2
+call Math.multiply 2
+sub
+push argument 1
+lt
+//            let res  =  part  *  2 ; 
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push local 0
+push constant 2
+call Math.multiply 2
+pop local 1
+//         } 
+//        else { 
+goto IF_END8
+label IF_FALSE8
+//            let res  =   ( part  *  2 )   +  1 ; 
+push local 0
+push constant 2
+call Math.multiply 2
+push constant 1
+add
+pop local 1
+//         } 
+label IF_END8
+//        if ( flag )  { 
+push local 2
+//            return  - res ; 
+if-goto IF_TRUE9
+goto IF_FALSE9
+label IF_TRUE9
+push local 1
+neg
+return
+//         } 
+//        return res ; 
+label IF_FALSE9
+push local 1
+return
+//     } 
+//    function int sqrt ( int x )   { 
+//        var int res ,  cnt ,  temp ,  mul ; 
+//        let res  =  0 ; 
+function Math.sqrt 4
+push constant 0
+pop local 0
+//        let cnt  =  7 ; 
+push constant 7
+pop local 1
+//        if ( x  <  0 )  { 
+push argument 0
+push constant 0
+lt
+//            do Sys . error ( 0 )  ; 
+if-goto IF_TRUE10
+goto IF_FALSE10
+label IF_TRUE10
+push constant 0
+call Sys.error 1
+pop temp 0
+//         } 
+//        while ( cnt  >   - 1 )  { 
+label IF_FALSE10
+label WHILE_EXP2
+push local 1
+push constant 1
+neg
+gt
+not
+//            let temp  =  res  +  MaskArray [ cnt ]  ; 
+if-goto WHILE_END2
+push local 0
+push static 0
+push local 1
+add
+pop pointer 1
+push that 0
+add
+pop local 2
+//            let mul  =  temp  *  temp ; 
+push local 2
+push local 2
+call Math.multiply 2
+pop local 3
+//            if (  (  ~  ( mul  >  x )  )   &   (  ~  ( mul  <  0 )  )  )  { 
+push local 3
+push argument 0
+gt
+not
+push local 3
+push constant 0
+lt
+not
+and
+//                let res  =  temp ; 
+if-goto IF_TRUE11
+goto IF_FALSE11
+label IF_TRUE11
+push local 2
+pop local 0
+//             } 
+//            let cnt  =  cnt  -  1 ; 
+label IF_FALSE11
+push local 1
+push constant 1
+sub
+pop local 1
+//         } 
+goto WHILE_EXP2
+label WHILE_END2
+//        return res ; 
+push local 0
+return
+//     } 
+//    function int max ( int a ,  int b )   { 
+//        if ( a  <  b )  { 
+function Math.max 0
+push argument 0
+push argument 1
+lt
+//            return b ; 
+if-goto IF_TRUE12
+goto IF_FALSE12
+label IF_TRUE12
+push argument 1
+return
+//         } 
+//        return a ; 
+label IF_FALSE12
+push argument 0
+return
+//     } 
+//    function int min ( int a ,  int b )   { 
+//        if ( a  <  b )  { 
+function Math.min 0
+push argument 0
+push argument 1
+lt
+//            return a ; 
+if-goto IF_TRUE13
+goto IF_FALSE13
+label IF_TRUE13
+push argument 0
+return
+//         }    
+//        return b ; 
+label IF_FALSE13
+push argument 1
+return
+//     } 
+// } 

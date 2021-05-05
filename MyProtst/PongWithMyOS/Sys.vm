@@ -1,0 +1,134 @@
+//class Sys  { 
+//    static String StrErr ; 
+//    function void init (  )   { 
+//        do Memory . init (  )  ; 
+function Sys.init 0
+call Memory.init 0
+pop temp 0
+//        do Keyboard . init (  )  ; 
+call Keyboard.init 0
+pop temp 0
+//        do Math . init (  )  ; 
+call Math.init 0
+pop temp 0
+//        do Output . init (  )  ; 
+call Output.init 0
+pop temp 0
+//        do Screen . init (  )  ; 
+call Screen.init 0
+pop temp 0
+//        do Main . main (  )  ; 
+call Main.main 0
+pop temp 0
+//        do Sys . halt (  )  ; 
+call Sys.halt 0
+pop temp 0
+//        let StrErr  =   " ERR< "  ; 
+push constant 4
+call String.new 1
+push constant 69
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 60
+call String.appendChar 2
+pop static 0
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void halt (  )   { 
+//        while ( true )  {  } 
+function Sys.halt 0
+label WHILE_EXP0
+push constant 1
+neg
+not
+if-goto WHILE_END0
+goto WHILE_EXP0
+label WHILE_END0
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void wait ( int duration )   { 
+//        var int WaitTime ; 
+//        let WaitTime  =  0 ; 
+function Sys.wait 1
+push constant 0
+pop local 0
+//        if ( duration  <  0 )  { 
+push argument 0
+push constant 0
+lt
+//            do Sys . error ( 1 )  ; 
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 1
+call Sys.error 1
+pop temp 0
+//         } 
+//        while ( duration  >  0 ) 
+label IF_FALSE0
+label WHILE_EXP1
+push argument 0
+push constant 0
+gt
+not
+//         { 
+//            let WaitTime  =  340 ; 
+if-goto WHILE_END1
+push constant 340
+pop local 0
+//            while ( WaitTime  >  0 )  { 
+label WHILE_EXP2
+push local 0
+push constant 0
+gt
+not
+//                let WaitTime  =  WaitTime  -  1 ; 
+if-goto WHILE_END2
+push local 0
+push constant 1
+sub
+pop local 0
+//             } 
+goto WHILE_EXP2
+label WHILE_END2
+//            let duration  =  duration  -  1 ; 
+push argument 0
+push constant 1
+sub
+pop argument 0
+//         }         
+goto WHILE_EXP1
+label WHILE_END1
+//        return ; 
+push constant 0
+return
+//     } 
+//    function void error ( int errorCode )   { 
+//        do Output . printString ( StrErr )  ; 
+function Sys.error 0
+push static 0
+call Output.printString 1
+pop temp 0
+//        do Output . printInt ( errorCode )  ; 
+push argument 0
+call Output.printInt 1
+pop temp 0
+//        do Output . printChar ( 62 )  ; 
+push constant 62
+call Output.printChar 1
+pop temp 0
+//        do Sys . halt (  )  ; 
+call Sys.halt 0
+pop temp 0
+//        return ; 
+push constant 0
+return
+//     } 
+// } 

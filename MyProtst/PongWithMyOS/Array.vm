@@ -1,0 +1,21 @@
+//class Array  { 
+//    function Array new ( int size )   { 
+//    	return Memory . alloc ( size )  ; 
+function Array.new 0
+push argument 0
+call Memory.alloc 1
+return
+//     } 
+//    method void dispose (  )   { 
+//    	do Memory . deAlloc ( this )  ; 
+function Array.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+//    	return ; 
+push constant 0
+return
+//     } 
+// } 

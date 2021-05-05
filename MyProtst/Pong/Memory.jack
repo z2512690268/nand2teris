@@ -1,0 +1,70 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * Memory operations library.
+ */ 
+class Memory {
+
+    static int HeapBase; 
+    /** Initializes memory parameters. */
+    function void init() {
+        let HeapBase = 0;
+        let HeapBase[2048] = 14336;
+        let HeapBase[2049] = 16384;
+        return;
+    }
+
+    /** Returns the value of the main memory at the given address. */
+    function int peek(int address) {
+        return HeapBase[address];
+    }
+
+    /** Sets the value of the main memory at this address
+     *  to the given value. */
+    function void poke(int address, int value) {
+        let HeapBase[address] = value;
+        return;
+    }
+
+    /** finds and allocates from the heap a memory block of the 
+     *  specified size and returns a reference to its base address. */
+    function int alloc(int size) {
+		var int freeList;
+		if(size < 1){
+			do Sys.error(4);
+		}
+		let freeList = 2048;
+		while(freeList[0] < (size + 5)){
+			let freeList = freeList[1];
+			if(freeList[0] = (size + 3)){
+				let freeList[0] = freeList[0] - size - 1;
+				let freeList[2] = size + 1;
+				return freeList + 3;
+			}
+		}
+		if(freeList[1] = null){
+			do Sys.error(5);
+		}
+		let freeList[size + 3] = freeList[0] - size - 3;
+		let freeList[size + 4] = freeList[1];
+		let freeList[0] = 2;
+		let freeList[1] = freeList + size + 3;
+		let freeList[2] = size + 1;
+		return freeList + 3;
+    }
+
+    /** De-allocates the given object and frees its space. */
+    function void deAlloc(int object) {
+    	var int freeList;
+    	let freeList = 2048;
+    	while(freeList[1] < object){
+    		let freeList = freeList[1];
+    	}
+        let freeList[0] = freeList[0] + object[-1] + HeapBase[freeList[1]];
+    	let freeList[1] = HeapBase[freeList[1] + 1];
+    	return;
+    }    
+}

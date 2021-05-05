@@ -1,0 +1,65 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Sys.jack
+
+/**
+ * A library of basic system services.
+ */
+class Sys {
+
+    static String StrErr;
+    /** Performs all the initializations required by the OS. */
+    function void init() {
+        do Memory.init();
+        do Keyboard.init();
+        do Math.init();
+        do Output.init();
+        do Screen.init();
+        do Main.main();
+        do Sys.halt();
+        let StrErr = "ERR<";
+        return;
+    }
+
+    /** Halts execution. */
+    function void halt() {
+        while(true){}
+        return;
+    }
+
+    /** Waits approximately duration milliseconds and then returns. */
+    function void wait(int duration) {
+        var int WaitTime;
+        let WaitTime = 0;
+        if(duration < 0){
+            do Sys.error(1);
+        }
+        while(duration > 0)
+        {
+            let WaitTime = 340;
+            while(WaitTime > 0){
+                let WaitTime = WaitTime - 1;
+            }
+            let duration = duration - 1;
+        }        
+        return;
+    }
+    /** Prints the given error code in the form "ERR<errorCode>", and halts. */
+    
+        // The whole list of error number:
+        //     0: Math.sqrt(x) if x < 0;
+        //     1: Math.divide(x) if x = 0;
+        //     3: String.appendChar(c) if upper than the max length
+        //     4: Memory.alloc(size) if size < 1;
+        //     5. Memory.alloc(size) if space not enough
+        //     6: Memory.dealloc(object) if object < 2048 || object > 16383
+        //     7: String.eraseLastChar() if StringLength = 0
+    function void error(int errorCode) {
+        do Output.printString(StrErr);
+        do Output.printInt(errorCode);
+        do Output.printChar(62);
+        do Sys.halt();
+        return;
+    }
+}

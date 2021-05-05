@@ -1,0 +1,378 @@
+//class String  { 
+//    field Array StringArray ; 
+//    field int StringLength ; 
+//    field int MaxLength ; 
+//    constructor String new ( int maxLength )   { 
+//        let StringLength  =  0 ; 
+function String.new 0
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push constant 0
+pop this 1
+//        let MaxLength  =  maxLength ; 
+push argument 0
+pop this 2
+//        if ( maxLength  =  0 )  { 
+push argument 0
+push constant 0
+eq
+//            return this ; 
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+return
+//         } 
+//        let StringArray  =  Memory . alloc ( maxLength )  ; 
+label IF_FALSE0
+push argument 0
+call Memory.alloc 1
+pop this 0
+//        return this ; 
+push pointer 0
+return
+//     } 
+//    method void dispose (  )   { 
+//        if ( MaxLength  =  0 )  { 
+function String.dispose 0
+push argument 0
+pop pointer 0
+push this 2
+push constant 0
+eq
+//            return ; 
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+//         } 
+//        do Memory . deAlloc ( StringArray )  ; 
+label IF_FALSE1
+push this 0
+call Memory.deAlloc 1
+pop temp 0
+//        do Memory . deAlloc ( this )  ; 
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+//        return ; 
+push constant 0
+return
+//     } 
+//    method int length (  )   { 
+//        return StringLength ; 
+function String.length 0
+push argument 0
+pop pointer 0
+push this 1
+return
+//     } 
+//    method char charAt ( int j )   { 
+//        return StringArray [ j ]  ; 
+function String.charAt 0
+push argument 0
+pop pointer 0
+push this 0
+push argument 1
+add
+pop pointer 1
+push that 0
+return
+//     } 
+//    method void setCharAt ( int j ,  char c )   { 
+//        let StringArray [ j ]   =  c ; 
+function String.setCharAt 0
+push argument 0
+pop pointer 0
+push this 0
+push argument 1
+add
+pop temp 1
+push argument 2
+push temp 1
+pop pointer 1
+pop that 0
+//        return ; 
+push constant 0
+return
+//     } 
+//    method String appendChar ( char c )   { 
+//        if (  ~  ( StringLength  <  MaxLength )  )  { 
+function String.appendChar 0
+push argument 0
+pop pointer 0
+push this 1
+push this 2
+lt
+not
+//            do Sys . error ( 3 )  ; 
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 3
+call Sys.error 1
+pop temp 0
+//         } 
+//        let StringArray [ StringLength ]   =  c ; 
+label IF_FALSE2
+push this 0
+push this 1
+add
+pop temp 1
+push argument 1
+push temp 1
+pop pointer 1
+pop that 0
+//        let StringLength  =  StringLength  +  1 ; 
+push this 1
+push constant 1
+add
+pop this 1
+//        return this ; 
+push pointer 0
+return
+//     } 
+//    method void eraseLastChar (  )   { 
+//        if ( StringLength  =  0 )  { 
+function String.eraseLastChar 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 0
+eq
+//            do Sys . error ( 7 )  ; 
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 7
+call Sys.error 1
+pop temp 0
+//         } 
+//        let StringLength  =  StringLength  -  1 ; 
+label IF_FALSE3
+push this 1
+push constant 1
+sub
+pop this 1
+//        return ; 
+push constant 0
+return
+//     } 
+//    method int intValue (  )   { 
+//        var int sum ,  i ,  flag ; 
+//        let sum  =  0 ; 
+function String.intValue 3
+push argument 0
+pop pointer 0
+push constant 0
+pop local 0
+//        let i  =  0 ; 
+push constant 0
+pop local 1
+//        let flag  =  0 ; 
+push constant 0
+pop local 2
+//        if ( charAt ( 0 )   =  45 )  { 
+push pointer 0
+push constant 0
+call String.charAt 2
+push constant 45
+eq
+//            let flag  =   - 1 ; 
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 1
+neg
+pop local 2
+//            let i  =  i  +  1 ; 
+push local 1
+push constant 1
+add
+pop local 1
+//         } 
+//        while (   (  ~  ( StringArray [ i ]   <  48 )  )   &   (  ~  ( StringArray [ i ]   >  57 )  )   &   ( i  <  StringLength )   )  { 
+label IF_FALSE4
+label WHILE_EXP0
+push this 0
+push local 1
+add
+pop pointer 1
+push that 0
+push constant 48
+lt
+not
+push this 0
+push local 1
+add
+pop pointer 1
+push that 0
+push constant 57
+gt
+not
+and
+push local 1
+push this 1
+lt
+and
+not
+//            let sum  =  sum  *  10  +  StringArray [ i ]   -  48 ; 
+if-goto WHILE_END0
+push local 0
+push constant 10
+call Math.multiply 2
+push this 0
+push local 1
+add
+pop pointer 1
+push that 0
+add
+push constant 48
+sub
+pop local 0
+//            let i  =  i  +  1 ; 
+push local 1
+push constant 1
+add
+pop local 1
+//         } 
+goto WHILE_EXP0
+label WHILE_END0
+//        if ( flag )  { 
+push local 2
+//            return  - sum ; 
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push local 0
+neg
+return
+//         } 
+//        return sum ; 
+label IF_FALSE5
+push local 0
+return
+//     } 
+//    method void setInt ( int number )   { 
+//        var int temp ,  left ; 
+//        let StringLength  =  0 ; 
+function String.setInt 2
+push argument 0
+pop pointer 0
+push constant 0
+pop this 1
+//        if (  ( number  <  0 )   &   ( number  >   - 10 )  )  { 
+push argument 1
+push constant 0
+lt
+push argument 1
+push constant 10
+neg
+gt
+and
+//            do appendChar ( 45 )  ; 
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+push pointer 0
+push constant 45
+call String.appendChar 2
+pop temp 0
+//            do appendChar (  - number  +  48 )  ; 
+push pointer 0
+push argument 1
+neg
+push constant 48
+add
+call String.appendChar 2
+pop temp 0
+//            return ; 
+push constant 0
+return
+//         } 
+//        if ( number  =  0 )  { 
+label IF_FALSE6
+push argument 1
+push constant 0
+eq
+//            return ; 
+if-goto IF_TRUE7
+goto IF_FALSE7
+label IF_TRUE7
+push constant 0
+return
+//         } 
+//        let left  =  number  /  10 ; 
+label IF_FALSE7
+push argument 1
+push constant 10
+call Math.divide 2
+pop local 1
+//        do setInt ( left )  ; 
+push pointer 0
+push local 1
+call String.setInt 2
+pop temp 0
+//        let temp  =  number  -   ( left  *  10 )  ; 
+push argument 1
+push local 1
+push constant 10
+call Math.multiply 2
+sub
+pop local 0
+//        if ( temp  >  0 )  { 
+push local 0
+push constant 0
+gt
+//            do appendChar ( temp  +  48 )  ; 
+if-goto IF_TRUE8
+goto IF_FALSE8
+label IF_TRUE8
+push pointer 0
+push local 0
+push constant 48
+add
+call String.appendChar 2
+pop temp 0
+//         } 
+//        else { 
+goto IF_END8
+label IF_FALSE8
+//            do appendChar (  - temp  +  48 )  ; 
+push pointer 0
+push local 0
+neg
+push constant 48
+add
+call String.appendChar 2
+pop temp 0
+//         } 
+label IF_END8
+//        let number  =  left ;    
+push local 1
+pop argument 1
+//        return ; 
+push constant 0
+return
+//     } 
+//    function char newLine (  )   { 
+//        return 128 ; 
+function String.newLine 0
+push constant 128
+return
+//     } 
+//    function char backSpace (  )   { 
+//        return 129 ; 
+function String.backSpace 0
+push constant 129
+return
+//     } 
+//    function char doubleQuote (  )   { 
+//        return 34 ; 
+function String.doubleQuote 0
+push constant 34
+return
+//     } 
+// } 

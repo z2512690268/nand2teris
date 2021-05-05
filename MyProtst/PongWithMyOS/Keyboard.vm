@@ -1,0 +1,132 @@
+//class Keyboard  { 
+//    static String buf ; 
+//    function void init (  )   { 
+//        let buf  =  String . new ( 64 )  ; 
+function Keyboard.init 0
+push constant 64
+call String.new 1
+pop static 0
+//        return  ; 
+push constant 0
+return
+//     }  
+//    function char keyPressed (  )   { 
+//        return Memory . peek ( 24576 )  ; 
+function Keyboard.keyPressed 0
+push constant 24576
+call Memory.peek 1
+return
+//     } 
+//    function char readChar (  )   { 
+//        var char Key ; 
+//        do Output . printChar ( 0 )  ; 
+function Keyboard.readChar 1
+push constant 0
+call Output.printChar 1
+pop temp 0
+//        while ( Key  =  0 )  { 
+label WHILE_EXP0
+push local 0
+push constant 0
+eq
+not
+//            let Key  =  Memory . peek ( 24576 )  ; 
+if-goto WHILE_END0
+push constant 24576
+call Memory.peek 1
+pop local 0
+//         } 
+goto WHILE_EXP0
+label WHILE_END0
+//        do Output . backSpace (  )  ; 
+call Output.backSpace 0
+pop temp 0
+//        do Output . printChar ( Key )  ; 
+push local 0
+call Output.printChar 1
+pop temp 0
+//        return Key ; 
+push local 0
+return
+//     } 
+//    function String readLine ( String message )   { 
+//        var char Key ; 
+//        do buf . dispose (  )  ; 
+function Keyboard.readLine 1
+push static 0
+call String.dispose 1
+pop temp 0
+//        let buf  =  String . new ( 64 )  ; 
+push constant 64
+call String.new 1
+pop static 0
+//        do Output . printString ( message )  ; 
+push argument 0
+call Output.printString 1
+pop temp 0
+//        let Key  =  Keyboard . readChar (  )  ; 
+call Keyboard.readChar 0
+pop local 0
+//        do Sys . wait ( 200 )  ; 
+push constant 200
+call Sys.wait 1
+pop temp 0
+//        while (  ~  ( Key  =  String . newLine (  )  )  )  { 
+label WHILE_EXP1
+push local 0
+call String.newLine 0
+eq
+not
+not
+//            if ( Key  =  String . backSpace (  )  )  { 
+if-goto WHILE_END1
+push local 0
+call String.backSpace 0
+eq
+//                do buf . eraseLastChar (  )  ; 
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push static 0
+call String.eraseLastChar 1
+pop temp 0
+//             } 
+//            else { 
+goto IF_END0
+label IF_FALSE0
+//              do buf . appendChar ( Key )  ; 
+push static 0
+push local 0
+call String.appendChar 2
+pop temp 0
+//             } 
+label IF_END0
+//            let Key  =  Keyboard . readChar (  )  ; 
+call Keyboard.readChar 0
+pop local 0
+//            do Sys . wait ( 200 )  ; 
+push constant 200
+call Sys.wait 1
+pop temp 0
+//         } 
+goto WHILE_EXP1
+label WHILE_END1
+//        return buf ; 
+push static 0
+return
+//     }    
+//    function int readInt ( String message )   { 
+//        var int sum ; 
+//        var boolean flag ; 
+//        var int ch ; 
+//        do Keyboard . readLine ( message )  ; 
+function Keyboard.readInt 3
+push argument 0
+call Keyboard.readLine 1
+pop temp 0
+//        return buf . intValue (  )  ; 
+push static 0
+call String.intValue 1
+return
+//     } 
+// } 
