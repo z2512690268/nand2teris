@@ -1,0 +1,14 @@
+// Name : MMux
+// INPUT : a, b, sel
+// OUTPUT : out 
+// FUNC : if sel=0 then out=a else out=b
+
+CHIP MMux{
+	IN a, b, sel;
+	OUT out;
+	PARTS:
+	MNot(in = sel, out = nsel);
+	Nand(a = nsel, b = a, out = nifa);
+	Nand(a = sel, b = b, out = nifb);
+	Nand(a = nifa, b = nifb, out = out);
+}

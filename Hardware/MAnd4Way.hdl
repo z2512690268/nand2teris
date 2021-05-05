@@ -1,0 +1,12 @@
+// Name : MAnd4Way
+// INPUT : a, b, c, d
+// OUTPUT : out
+// FUNC : out = a & b & c & d
+CHIP MAnd4Way{
+	IN a, b, c, d;
+	OUT out;
+	PARTS:
+	MAnd(a = a, b = b, out = w1);
+	MAnd(a = w1, b = c, out = w2);
+	MAnd(a = w2, b = d, out = out);
+} 

@@ -1,0 +1,13 @@
+// Name : MFullAdder.hdl
+// INPUT : a, b, c
+// OUTPUT : sum, carry
+// FUNC : 	sum = LSB of a + b + c
+//			carry = MSB of a + b + c
+CHIP MFullAdder{
+	IN a, b, c;
+	OUT sum, carry;
+	PARTS:
+	MHalfAdder(a = a, b = b, sum = ts, carry = tc1);
+	MHalfAdder(a = ts, b = c, sum = sum, carry = tc2);
+	MOr(a = tc1, b = tc2, out = carry);
+}

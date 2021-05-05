@@ -1,0 +1,11 @@
+// Name : MAnd3Way
+// INPUT : a, b, c
+// OUTPUT : out
+// FUNC : out = a & b & c
+CHIP MAnd3Way{
+	IN a, b, c;
+	OUT out;
+	PARTS:
+	MAnd(a = a, b = b, out = w1);
+	MAnd(a = w1, b = c, out = out);
+} 

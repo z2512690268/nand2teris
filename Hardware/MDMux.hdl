@@ -1,0 +1,13 @@
+// Name : MDMux
+// INPUT : in, sel
+// OUTPUT : a, b 
+// FUNC : if sel=0 then a=in else b=in
+
+CHIP MDMux{
+	IN in, sel;
+	OUT a, b;
+	PARTS:
+	MNot(in = sel, out = nsel);
+	MAnd(a = nsel, b = in, out = a);
+	MAnd(a = sel, b = in, out = b);
+} 

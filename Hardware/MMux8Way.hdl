@@ -1,0 +1,13 @@
+// Name : MMux8Way
+// INPUT : a, b, c, d, e, f, g, h, sel[3]
+// OUTPUT : out[16] 
+// FUNC : 000->a, 001->b, 010->c, 011->d, 100->e, 101->f, 110->g, 111->h
+CHIP MMux8Way {
+	IN a, b, c, d, e, f, g, h, sel[3];
+	OUT out;
+
+	PARTS:
+	MMux4Way(a = a, b = b, c = c, d = d, sel = sel[0..1], out = Low4);
+	MMux4Way(a = e, b = f, c = g, d = h, sel = sel[0..1], out = High4);
+	MMux(a = Low4, b = High4, sel = sel[2], out = out);
+}

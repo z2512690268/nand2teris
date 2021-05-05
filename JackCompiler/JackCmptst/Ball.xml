@@ -1,0 +1,707 @@
+<class>
+	<keyword> class </keyword>
+	<identifier> Ball </identifier>#######Declareing identifier!!!
+	<symbol> { </symbol>
+	<classVarDec>
+		<keyword> field </keyword>
+		<keyword> int </keyword>
+		<identifier> x </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> y </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<classVarDec>
+		<keyword> field </keyword>
+		<keyword> int </keyword>
+		<identifier> lengthx </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> lengthy </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<classVarDec>
+		<keyword> field </keyword>
+		<keyword> int </keyword>
+		<identifier> d </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> straightD </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> diagonalD </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<classVarDec>
+		<keyword> field </keyword>
+		<keyword> boolean </keyword>
+		<identifier> invert </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> positivex </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> positivey </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<classVarDec>
+		<keyword> field </keyword>
+		<keyword> int </keyword>
+		<identifier> leftWall </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> rightWall </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> topWall </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> bottomWall </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<classVarDec>
+		<keyword> field </keyword>
+		<keyword> int </keyword>
+		<identifier> wall </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<classVarDec>
+		<keyword> static </keyword>
+		<keyword> int </keyword>
+		<identifier> test </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<classVarDec>
+		<keyword> static </keyword>
+		<keyword> int </keyword>
+		<identifier> a </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> b </identifier>#######Declareing identifier!!!
+		<symbol> , </symbol>
+		<identifier> c </identifier>#######Declareing identifier!!!
+		<symbol> ; </symbol>
+	</classVarDec>
+	<subroutineDec>
+		<keyword> constructor </keyword>
+		<identifier> Ball </identifier>#######Declareing identifier!!!
+		<identifier> new </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+			<keyword> int </keyword>
+			<identifier> Ax </identifier>#######Declareing identifier!!!
+			<symbol> , </symbol>
+			<keyword> int </keyword>
+			<identifier> Ay </identifier>#######Declareing identifier!!!
+			<symbol> , </symbol>
+			<keyword> int </keyword>
+			<identifier> AleftWall </identifier>#######Declareing identifier!!!
+			<symbol> , </symbol>
+			<keyword> int </keyword>
+			<identifier> ArightWall </identifier>#######Declareing identifier!!!
+			<symbol> , </symbol>
+			<keyword> int </keyword>
+			<identifier> AtopWall </identifier>#######Declareing identifier!!!
+			<symbol> , </symbol>
+			<keyword> int </keyword>
+			<identifier> AbottomWall </identifier>#######Declareing identifier!!!
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<statements>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> x </identifier>#######field int 0
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> Ax </identifier>#######arg int 0
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> y </identifier>#######field int 1
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> Ay </identifier>#######arg int 1
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> leftWall </identifier>#######field int 10
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> AleftWall </identifier>#######arg int 2
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> rightWall </identifier>#######field int 11
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> ArightWall </identifier>#######arg int 3
+						</term>
+						<symbol> - </symbol>
+						<term>
+							<integerConstant> 6 </integerConstant>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> topWall </identifier>#######field int 12
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> AtopWall </identifier>#######arg int 4
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> bottomWall </identifier>#######field int 13
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> AbottomWall </identifier>#######arg int 5
+						</term>
+						<symbol> - </symbol>
+						<term>
+							<integerConstant> 6 </integerConstant>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> wall </identifier>#######field int 14
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<integerConstant> 0 </integerConstant>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<doStatement>
+					<keyword> do </keyword>
+					<identifier> show </identifier>#######Declareing identifier!!!
+					<symbol> ( </symbol>
+					<expressionList>
+					</expressionList>
+					<symbol> ) </symbol>
+					<symbol> ; </symbol>
+				</doStatement>
+				<returnStatement>
+					<keyword> return </keyword>
+					<expression>
+						<term>
+							<keyword> this </keyword>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</returnStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<keyword> void </keyword>
+		<identifier> dispose </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<statements>
+				<doStatement>
+					<keyword> do </keyword>
+					<identifier> Memory </identifier>#######Declareing identifier!!!
+					<symbol> . </symbol>
+					<identifier> deAlloc </identifier>#######Declareing identifier!!!
+					<symbol> ( </symbol>
+					<expressionList>
+						<expression>
+							<term>
+								<keyword> this </keyword>
+							</term>
+						</expression>
+					</expressionList>
+					<symbol> ) </symbol>
+					<symbol> ; </symbol>
+				</doStatement>
+				<returnStatement>
+					<keyword> return </keyword>
+					<symbol> ; </symbol>
+				</returnStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<keyword> void </keyword>
+		<identifier> show </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<statements>
+				<doStatement>
+					<keyword> do </keyword>
+					<identifier> Screen </identifier>#######Declareing identifier!!!
+					<symbol> . </symbol>
+					<identifier> setColor </identifier>#######Declareing identifier!!!
+					<symbol> ( </symbol>
+					<expressionList>
+						<expression>
+							<term>
+								<keyword> true </keyword>
+							</term>
+						</expression>
+					</expressionList>
+					<symbol> ) </symbol>
+					<symbol> ; </symbol>
+				</doStatement>
+				<doStatement>
+					<keyword> do </keyword>
+					<identifier> draw </identifier>#######Declareing identifier!!!
+					<symbol> ( </symbol>
+					<expressionList>
+					</expressionList>
+					<symbol> ) </symbol>
+					<symbol> ; </symbol>
+				</doStatement>
+				<returnStatement>
+					<keyword> return </keyword>
+					<symbol> ; </symbol>
+				</returnStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<keyword> void </keyword>
+		<identifier> hide </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<statements>
+				<doStatement>
+					<keyword> do </keyword>
+					<identifier> Screen </identifier>#######Declareing identifier!!!
+					<symbol> . </symbol>
+					<identifier> setColor </identifier>#######Declareing identifier!!!
+					<symbol> ( </symbol>
+					<expressionList>
+						<expression>
+							<term>
+								<keyword> false </keyword>
+							</term>
+						</expression>
+					</expressionList>
+					<symbol> ) </symbol>
+					<symbol> ; </symbol>
+				</doStatement>
+				<doStatement>
+					<keyword> do </keyword>
+					<identifier> draw </identifier>#######Declareing identifier!!!
+					<symbol> ( </symbol>
+					<expressionList>
+					</expressionList>
+					<symbol> ) </symbol>
+					<symbol> ; </symbol>
+				</doStatement>
+				<returnStatement>
+					<keyword> return </keyword>
+					<symbol> ; </symbol>
+				</returnStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<keyword> void </keyword>
+		<identifier> draw </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<statements>
+				<doStatement>
+					<keyword> do </keyword>
+					<identifier> Screen </identifier>#######Declareing identifier!!!
+					<symbol> . </symbol>
+					<identifier> drawRectangle </identifier>#######Declareing identifier!!!
+					<symbol> ( </symbol>
+					<expressionList>
+						<expression>
+							<term>
+								<identifier> x </identifier>#######field int 0
+							</term>
+						</expression>
+						<symbol> , </symbol>
+						<expression>
+							<term>
+								<identifier> y </identifier>#######field int 1
+							</term>
+						</expression>
+						<symbol> , </symbol>
+						<expression>
+							<term>
+								<identifier> x </identifier>#######field int 0
+							</term>
+							<symbol> + </symbol>
+							<term>
+								<integerConstant> 5 </integerConstant>
+							</term>
+						</expression>
+						<symbol> , </symbol>
+						<expression>
+							<term>
+								<identifier> y </identifier>#######field int 1
+							</term>
+							<symbol> + </symbol>
+							<term>
+								<integerConstant> 5 </integerConstant>
+							</term>
+						</expression>
+					</expressionList>
+					<symbol> ) </symbol>
+					<symbol> ; </symbol>
+				</doStatement>
+				<returnStatement>
+					<keyword> return </keyword>
+					<symbol> ; </symbol>
+				</returnStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<keyword> int </keyword>
+		<identifier> getLeft </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<statements>
+				<returnStatement>
+					<keyword> return </keyword>
+					<expression>
+						<term>
+							<identifier> x </identifier>#######field int 0
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</returnStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<keyword> int </keyword>
+		<identifier> getRight </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<statements>
+				<returnStatement>
+					<keyword> return </keyword>
+					<expression>
+						<term>
+							<identifier> x </identifier>#######field int 0
+						</term>
+						<symbol> + </symbol>
+						<term>
+							<integerConstant> 5 </integerConstant>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</returnStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<keyword> void </keyword>
+		<identifier> setDestination </identifier>#######Declareing identifier!!!
+		<symbol> ( </symbol>
+		<parameterList>
+			<keyword> int </keyword>
+			<identifier> destx </identifier>#######Declareing identifier!!!
+			<symbol> , </symbol>
+			<keyword> int </keyword>
+			<identifier> desty </identifier>#######Declareing identifier!!!
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<varDec>
+				<keyword> var </keyword>
+				<keyword> int </keyword>
+				<identifier> dx </identifier>#######Declareing identifier!!!
+				<symbol> , </symbol>
+				<identifier> dy </identifier>#######Declareing identifier!!!
+				<symbol> , </symbol>
+				<identifier> temp </identifier>#######Declareing identifier!!!
+				<symbol> ; </symbol>
+			</varDec>
+			<statements>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> lengthx </identifier>#######field int 2
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> destx </identifier>#######arg int 0
+						</term>
+						<symbol> - </symbol>
+						<term>
+							<identifier> x </identifier>#######field int 0
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> lengthy </identifier>#######field int 3
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> desty </identifier>#######arg int 1
+						</term>
+						<symbol> - </symbol>
+						<term>
+							<identifier> y </identifier>#######field int 1
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> dx </identifier>#######var int 0
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> Math </identifier>#######Declareing identifier!!!
+							<symbol> . </symbol>
+							<identifier> abs </identifier>#######Declareing identifier!!!
+							<symbol> ( </symbol>
+							<expressionList>
+								<expression>
+									<term>
+										<identifier> lengthx </identifier>#######field int 2
+									</term>
+								</expression>
+							</expressionList>
+							<symbol> ) </symbol>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> dy </identifier>#######var int 1
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<identifier> Math </identifier>#######Declareing identifier!!!
+							<symbol> . </symbol>
+							<identifier> abs </identifier>#######Declareing identifier!!!
+							<symbol> ( </symbol>
+							<expressionList>
+								<expression>
+									<term>
+										<identifier> lengthy </identifier>#######field int 3
+									</term>
+								</expression>
+							</expressionList>
+							<symbol> ) </symbol>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> invert </identifier>#######field boolean 7
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<symbol> ( </symbol>
+							<expression>
+								<term>
+									<identifier> dx </identifier>#######var int 0
+								</term>
+								<symbol>&lt;</symbol>
+								<term>
+									<identifier> dy </identifier>#######var int 1
+								</term>
+							</expression>
+							<symbol> ) </symbol>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<ifStatement>
+					<keyword> if </keyword>
+					<symbol> ( </symbol>
+					<expression>
+						<term>
+							<identifier> invert </identifier>#######field boolean 7
+						</term>
+					</expression>
+					<symbol> ) </symbol>
+					<symbol> { </symbol>
+					<statements>
+						<letStatement>
+							<keyword> let </keyword>
+							<identifier> temp </identifier>#######var int 2
+							<symbol> = </symbol>
+							<expression>
+								<term>
+									<identifier> dx </identifier>#######var int 0
+								</term>
+							</expression>
+							<symbol> ; </symbol>
+						</letStatement>
+						<letStatement>
+							<keyword> let </keyword>
+							<identifier> dx </identifier>#######var int 0
+							<symbol> = </symbol>
+							<expression>
+								<term>
+									<identifier> dy </identifier>#######var int 1
+								</term>
+							</expression>
+							<symbol> ; </symbol>
+						</letStatement>
+						<letStatement>
+							<keyword> let </keyword>
+							<identifier> dy </identifier>#######var int 1
+							<symbol> = </symbol>
+							<expression>
+								<term>
+									<identifier> temp </identifier>#######var int 2
+								</term>
+							</expression>
+							<symbol> ; </symbol>
+						</letStatement>
+						<letStatement>
+							<keyword> let </keyword>
+							<identifier> positivex </identifier>#######field boolean 8
+							<symbol> = </symbol>
+							<expression>
+								<term>
+									<symbol> ( </symbol>
+									<expression>
+										<term>
+											<identifier> y </identifier>#######field int 1
+										</term>
+										<symbol>&lt;</symbol>
+										<term>
+											<identifier> desty </identifier>#######arg int 1
+										</term>
+									</expression>
+									<symbol> ) </symbol>
+								</term>
+							</expression>
+							<symbol> ; </symbol>
+						</letStatement>
+						<letStatement>
+							<keyword> let </keyword>
+							<identifier> positivey </identifier>#######field boolean 9
+							<symbol> = </symbol>
+							<expression>
+								<term>
+									<symbol> ( </symbol>
+									<expression>
+										<term>
+											<identifier> x </identifier>#######field int 0
+										</term>
+										<symbol>&lt;</symbol>
+										<term>
+											<identifier> destx </identifier>#######arg int 0
+										</term>
+									</expression>
+									<symbol> ) </symbol>
+								</term>
+							</expression>
+							<symbol> ; </symbol>
+						</letStatement>
+					</statements>
+					<symbol> } </symbol>
+				</ifStatement>
+				<elseStatement>
+				</elseStatement>
+				<{Statement>
+				</{Statement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> positivex </identifier>#######field boolean 8
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<symbol> ( </symbol>
+							<expression>
+								<term>
+									<identifier> x </identifier>#######field int 0
+								</term>
+								<symbol>&lt;</symbol>
+								<term>
+									<identifier> destx </identifier>#######arg int 0
+								</term>
+							</expression>
+							<symbol> ) </symbol>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> positivey </identifier>#######field boolean 9
+					<symbol> = </symbol>
+					<expression>
+						<term>
+							<symbol> ( </symbol>
+							<expression>
+								<term>
+									<identifier> y </identifier>#######field int 1
+								</term>
+								<symbol>&lt;</symbol>
+								<term>
+									<identifier> desty </identifier>#######arg int 1
+								</term>
+							</expression>
+							<symbol> ) </symbol>
+						</term>
+					</expression>
+					<symbol> ; </symbol>
+				</letStatement>
+			</statements>
+			<symbol> } </symbol>
+		</subroutineBody>
+	</subroutineDec>
+	<keyword> let </keyword>
+</class>

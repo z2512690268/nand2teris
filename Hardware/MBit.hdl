@@ -1,0 +1,11 @@
+// Name : MBit
+// INPUT : in, load
+// OUTPUT : out
+// FUNC : out(t) = load(t - 1) ? in(t - 1) : out(t - 1)
+CHIP MBit{
+	IN in, load;
+	OUT out;
+	PARTS:
+	MMux(a = lstout, b = in, sel = load, out = tmpout);
+	DFF(in = tmpout, out = out, out = lstout);
+}

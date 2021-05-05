@@ -1,0 +1,12 @@
+// Name : MComputer.hdl
+// INPUT : reset
+// OUTPUT : void
+// FUNC : 1. Go on when reset=0
+//		  2. Restart when reset = 1
+CHIP MComputer {
+	IN reset;
+	PARTS:
+	MCPU(inM = ReadM, instruction = instruction, reset = reset, outM = outM, writeM = writeM, addressM = DataPos, pc = pc);
+	ROM32K(address = pc, out = instruction);
+	MMemory(in = outM, load = writeM, address = DataPos, out = ReadM);
+}

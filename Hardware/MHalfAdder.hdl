@@ -1,0 +1,11 @@
+// Name : MHalfAdder
+// INPUT : a, b
+// OUTPUt : sum, carry
+// FUNC : sum = a xor b, carry = a and b
+CHIP MHalfAdder{
+	IN a, b;
+	OUT sum, carry;
+	PARTS:
+	MXor(a = a, b = b, out = sum);
+	MAnd(a = a, b = b, out = carry);
+}

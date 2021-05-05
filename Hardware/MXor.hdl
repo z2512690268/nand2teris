@@ -1,0 +1,15 @@
+// Name : MXor
+// INPUT : a, b
+// OUTPUT : out
+// FUNC : out=1 iff a!=b
+CHIP MXor{
+	IN a, b;
+	OUT out;
+
+	PARTS:
+	MNot(in = a, out = na);
+	MNot(in = b, out = nb);
+	MAnd(a = a, b = nb, out = w1);
+	MAnd(a = na, b = b, out = w2);
+	MOr(a = w1, b = w2, out = out);
+}

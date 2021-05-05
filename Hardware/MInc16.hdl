@@ -1,0 +1,26 @@
+// Name : MInc16.hdl
+// INPUT : in[16]
+// OUTPUT : out[16]
+// FUNC : out = in + 1
+CHIP MInc16 {
+	IN in[16];
+	OUT out[16];
+	PARTS:
+	MHalfAdder(a = in[0], b = true, sum = out[0], carry = c0);
+	MFullAdder(a = in[1], b = false, c = c0, sum = out[1], carry = c1);
+	MFullAdder(a = in[2], b = false, c = c1, sum = out[2], carry = c2);
+	MFullAdder(a = in[3], b = false, c = c2, sum = out[3], carry = c3);
+	MFullAdder(a = in[4], b = false, c = c3, sum = out[4], carry = c4);
+	MFullAdder(a = in[5], b = false, c = c4, sum = out[5], carry = c5);
+	MFullAdder(a = in[6], b = false, c = c5, sum = out[6], carry = c6);
+	MFullAdder(a = in[7], b = false, c = c6, sum = out[7], carry = c7);
+	MFullAdder(a = in[8], b = false, c = c7, sum = out[8], carry = c8);
+	MFullAdder(a = in[9], b = false, c = c8, sum = out[9], carry = c9);
+	MFullAdder(a = in[10], b = false, c = c9, sum = out[10], carry = c10);
+	MFullAdder(a = in[11], b = false, c = c10, sum = out[11], carry = c11);
+	MFullAdder(a = in[12], b = false, c = c11, sum = out[12], carry = c12);
+	MFullAdder(a = in[13], b = false, c = c12, sum = out[13], carry = c13);
+	MFullAdder(a = in[14], b = false, c = c13, sum = out[14], carry = c14);
+	MFullAdder(a = in[15], b = false, c = c14, sum = out[15], carry = c15);
+	
+}

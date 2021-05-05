@@ -1,0 +1,13 @@
+// Name : MNor
+// INPUT : a, b
+// OUTPUT : out
+// FUNC : out=1 iff a!=0 and b!=0
+CHIP MNor{
+	IN a, b;
+	OUT out;
+
+	PARTS:
+	MNot(in = a, out = na);
+	MNot(in = b, out = nb);
+	MAnd(a = na, b = nb, out = out);
+}

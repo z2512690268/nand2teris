@@ -1,0 +1,34 @@
+/*	Name : MALU
+	INPUT : x[16], y[16],
+			zx, nx, zy, ny, f, no	
+	OUTPUT : out[16], zr, ng
+	FUNC : 	zx set x to 0
+			nx set x to -x
+			zx:nx>>00->x, 01->-x, 10->0, 11->-1
+			nx 
+			f = 0, out = x & y else out = x + y
+			no = 0 -> out = out else out = -out
+			if out == 0 then zr = true
+			if out < 0 then ng = true
+*/
+CHIP MALU{
+	IN x[16], y[16], zx, nx, zy, ny, f, no;
+	OUT out[16], zr, ng;
+	PARTS:
+	MPulldown16(out = zero16);
+	MMux16(a = x, b = zero16, sel = zx, out = tempx); 
+	MMux16(a = y, b = zero16, sel = zy, out = tempy); 
+	MNot16(in = tempx, out = notx);
+	MNot16(in = tempy, out = noty);
+	MMux16(a = tempx, b = notx, sel = nx, out = realx);
+	MMux16(a = tempy, b = noty, sel = ny, out = realy);
+	MAnd16(a = realx, b = realy, out = xandy);
+	MAdd16(a = realx, b = realy, out = xaddy);
+	MMux16(a = xandy, b = xaddy, sel = f, out = tempout);
+	MNot16(in = tempout, out = notout);
+	MMux16(a = tempout, b = notout, sel = no, out[0..7] = LowOut, out[8..15] = HighOut, out[15] = ng, out = out);
+	MOr8Way(in = LowOut, out = or1);
+	MOr8Way(in = HighOut, out = or2);
+	MNor(a = or1, b = or2, out = zr);
+}
+

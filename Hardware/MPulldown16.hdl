@@ -1,0 +1,24 @@
+// Name : MPulldown16.hdl
+// INPUT : void
+// OUTPUT : out[16]
+// FUNC : out[i] = false
+CHIP MPulldown16 {
+	OUT out[16];
+	PARTS:
+	Nand(a = true, b = true, out = out[0]);
+	Nand(a = true, b = true, out = out[1]);
+	Nand(a = true, b = true, out = out[2]);
+	Nand(a = true, b = true, out = out[3]);
+	Nand(a = true, b = true, out = out[4]);
+	Nand(a = true, b = true, out = out[5]);
+	Nand(a = true, b = true, out = out[6]);
+	Nand(a = true, b = true, out = out[7]);
+	Nand(a = true, b = true, out = out[8]);
+	Nand(a = true, b = true, out = out[9]);
+	Nand(a = true, b = true, out = out[10]);
+	Nand(a = true, b = true, out = out[11]);
+	Nand(a = true, b = true, out = out[12]);
+	Nand(a = true, b = true, out = out[13]);
+	Nand(a = true, b = true, out = out[14]);
+	Nand(a = true, b = true, out = out[15]);
+}

@@ -1,0 +1,26 @@
+// Name : MNot16
+// INPUT : in[16]
+// OUTPUT : out[16] 
+// FUNC : for i=0...15 out[i]=Not(in[i])
+
+CHIP MNot16{
+	IN in[16];
+	OUT out[16];
+	PARTS:
+	MNot(in = in[0], out = out[0]);
+	MNot(in = in[1], out = out[1]);
+	MNot(in = in[2], out = out[2]);
+	MNot(in = in[3], out = out[3]);
+	MNot(in = in[4], out = out[4]);
+	MNot(in = in[5], out = out[5]);
+	MNot(in = in[6], out = out[6]);
+	MNot(in = in[7], out = out[7]);
+	MNot(in = in[8], out = out[8]);
+	MNot(in = in[9], out = out[9]);
+	MNot(in = in[10], out = out[10]);
+	MNot(in = in[11], out = out[11]);
+	MNot(in = in[12], out = out[12]);
+	MNot(in = in[13], out = out[13]);
+	MNot(in = in[14], out = out[14]);
+	MNot(in = in[15], out = out[15]);
+} 

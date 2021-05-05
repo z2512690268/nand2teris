@@ -1,0 +1,19 @@
+// Name : MRAM8.hdl
+// INPUT : in[16], address[3], load
+// OUTPUT : out[16]
+// FUNC : out(t) = RAM[address(t)](t)
+CHIP MRAM8 {
+	IN in[16], address[3], load;
+	OUT out[16];
+	PARTS:
+	MDMux8Way(in = load, sel = address, a = loada, b = loadb, c = loadc, d = loadd, e = loade, f = loadf, g = loadg, h = loadh);
+	MRegister(in = in, load = loada,  out = out0);
+	MRegister(in = in, load = loadb,  out = out1);
+	MRegister(in = in, load = loadc,  out = out2);
+	MRegister(in = in, load = loadd,  out = out3);
+	MRegister(in = in, load = loade,  out = out4);
+	MRegister(in = in, load = loadf,  out = out5);
+	MRegister(in = in, load = loadg,  out = out6);
+	MRegister(in = in, load = loadh,  out = out7);
+	MMux8Way16(a = out0, b = out1, c = out2, d = out3, e = out4, f = out5, g = out6, h = out7, sel = address, out = out);
+}

@@ -1,0 +1,18 @@
+// Name : MMemory.hdl
+// INPUT : in[16], load, address[15]
+// OUTPUT : out[16]
+// FUNC : 1. out = Memory[address(t)](t)
+//		  2. If load(t-1) then Memory[address(t-1)](t) = in(t-1)
+CHIP MMemory {
+	IN in[16], address[15], load;
+	OUT out[16];
+	PARTS:
+	MDMux16(in = in, sel = address[14], a = InRAM, b = InScreen);
+	MNot(in = address[14], out = naddress14);
+	MAnd(a = naddress14, b = load, out = TrueLoad);
+	RAM16K(in = InRAM, address = address[0..13], load = TrueLoad, out = out1);
+	Screen(in = InScreen, load = load, address = address[0..12], out = out2);
+	Keyboard(out = out3);
+	MMux16(a = out2, b = out3, sel = address[13], out = tout);
+	MMux16(a = out1, b = tout, sel = address[14], out = out);
+}

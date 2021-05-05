@@ -1,0 +1,89 @@
+Class Bar {
+	method Fraction foo(int y) {
+		var int temp;
+		let temp = (xxx+12)*-63;
+		...
+
+<class>
+	<keyword> class </keyword>
+	<identifier> Bar </identifier>
+	<symbol> { </symbol>
+	<subroutineDec>
+		<keyword> method </keyword>
+		<identifier> Fraction </identifier>
+		<identifier> foo </identifier>
+		<symbol> ( </symbol>
+		<parameterList>
+			<keyword> int </keyword>
+			<identifier> y </identifier>
+		</parameterList>
+		<symbol> ) </symbol>
+		<subroutineBody>
+			<symbol> { </symbol>
+			<varDec>
+				<keyword> var </keyword>
+				<keyword> int </keyword>
+				<identifier> temp </identifier>
+				<symbol> ; </symbol>
+			</varDec>
+			<statements>
+				<letStatement>
+					<keyword> let </keyword>
+					<identifier> temp </identifier>
+					<symbol> = </symbol>
+					<expression>
+					...
+
+class BankAccount {
+	static int nAccounts;
+	static int bankCommission;
+
+	field int id;
+	field String owner;
+	field int balance;
+
+	method int commission(int x) {}
+
+	method void transfer(int sum, BankAccount from, Date when) {
+		var int i, j;
+		var Date due;
+		let balance = (balance + sum) - commission(sum * 5);
+		return;
+	}
+}
+
+
+function BankAccount.commission
+
+function BankAccount.transfer
+	push balance
+	push sum
+	add
+	push this
+	push sum 
+	push 5
+	call multiply 
+	call commission
+	sub 
+	pop balance
+	push 0
+	return
+
+function BankAccount.commission 0
+
+function BankAccount.transfer 3
+	push argument 0
+	pop pointer 0
+	push this 2
+	push argument 1
+	add
+	push argument 0
+	push argument 1
+	push constant 5
+	call Math.multiply 2
+	call BankAccount.commission 2
+	sub 
+	pop this 2
+
+	push constant 0
+	return

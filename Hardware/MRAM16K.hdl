@@ -1,0 +1,15 @@
+// Name : MRAM16K.hdl
+// INPUT : in[16], address[14], load
+// OUTPUT : out[16]
+// FUNC : out(t) = RAM[address(t)](t)
+CHIP MRAM16K {
+	IN in[16], address[14], load;
+	OUT out[16];
+	PARTS:
+	MDMux4Way(in = load, sel = address[12..13], a = loada, b = loadb, c = loadc, d = loadd);
+	MRAM4K(in = in, address = address[0..11], load = loada,  out = out0);
+	MRAM4K(in = in, address = address[0..11], load = loadb,  out = out1);
+	MRAM4K(in = in, address = address[0..11], load = loadc,  out = out2);
+	MRAM4K(in = in, address = address[0..11], load = loadd,  out = out3);
+	MMux4Way16(a = out0, b = out1, c = out2, d = out3, sel = address[12..13], out = out);
+}

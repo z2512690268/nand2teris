@@ -1,0 +1,13 @@
+// Name : MDMux4Way
+// INPUT : in, sel[2]
+// OUTPUT : a, b, c, d 
+// FUNC : 00->a=in, 01->b=in, 10->c=in, 11->d=in
+
+CHIP MDMux4Way{
+	IN in, sel[2];
+	OUT a, b, c, d;
+	PARTS:
+	MDMux(in = in, sel = sel[1], a = inab, b = incd);
+	MDMux(in = inab, sel = sel[0], a = a, b = b);
+	MDMux(in = incd, sel = sel[0], a = c, b = d);
+} 

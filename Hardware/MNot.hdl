@@ -1,0 +1,10 @@
+// Name : MNot
+// INPUT : in 
+// OUTPUT : out 
+// FUNC : if in=0 then out=1 else out=0
+CHIP MNot {
+	IN in;
+	OUT out;
+	PARTS:
+	Nand(a = in, b = true, out = out);
+}

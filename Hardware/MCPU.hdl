@@ -1,0 +1,33 @@
+// Name : MCPU.hdl
+// INPUT : inM[16], 
+//		   instruction[16], 
+//		   reset
+// OUTPUT : outM[16],
+//			writeM,
+//			addressM[15],
+//			pc[15]
+/* FUNC : inM = M[A], when writeM=1 the outM would output the value.
+		  When reset=1, pc would be 0
+*/
+CHIP MCPU {
+	IN inM[16], instruction[16], reset;
+	OUT outM[16], writeM, addressM[15], pc[15];
+	PARTS:
+	MDMux16(in = instruction, sel = instruction[15], a[0..14] = WireA, b[12] = OPAM, b[11] = opzx, b[10] = opnx, b[9] = opzy, b[8] = opny, b[7] = opf, b[6] = opno, b[5] = storeA, b[4] = storeD, b[3] = storeM, b[2] = jmpLow, b[1] = jmpEq, b[0] = jmpHigh);
+	MMux16(a[15] = false, a[0..14] = WireA, b = out, sel = instruction[15], out = WireA2);
+	MNot(in = instruction[15], out = nins15);
+	MOr(a = nins15, b = storeA, out = RealStoreA);
+	ARegister(in = WireA2, load = RealStoreA, out = RA, out[0..14] = addressM);
+	MMux16(a = RA, b = inM, sel = OPAM, out = ALUAM);
+	MALU(x = RD, y = ALUAM, zx = opzx, nx = opnx, zy = opzy, ny = opny, f = opf, no = opno, out = out, zr = zr, ng = ng);
+	MMux16(a = inM, b = out, sel = storeM, out = outM);
+	MWire(in = storeM, out = writeM);
+	DRegister(in = out, load = storeD, out = RD);	
+	MNot(in = zr, out = nzr);
+	MNot(in = ng, out = nng);
+	MAnd(a = ng, b = jmpLow, out = TestLow);
+	MAnd(a = zr, b = jmpEq, out = TestEq);
+	MAnd3Way(a = nzr, b = nng, c = jmpHigh, out = TestHigh);
+	MOr3Way(a = TestLow, b = TestEq, c = TestHigh, out = IfPcA);
+	MPC(in = RA, load = IfPcA, inc = true, reset = reset,  out[0..14] = pc);
+}

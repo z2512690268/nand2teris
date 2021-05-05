@@ -1,0 +1,11 @@
+// Name : MOr3Way
+// INPUT : a, b, c
+// OUTPUT : out
+// FUNC : out = a | b | c
+CHIP MOr3Way{
+	IN a, b, c;
+	OUT out;
+	PARTS:
+	MOr(a = a, b = b, out = w1);
+	MOr(a = w1, b = c, out = out);
+} 

@@ -1,0 +1,13 @@
+// Name : MDMux8Way
+// INPUT : in, sel[3]
+// OUTPUT : a, b, c, d, e, f, g, h 
+// FUNC : 000->a=in, 001->b=in, 010->c=in, 011->d=in, 100->e=in, 101->f=in, 110->g=in, 111->h=in
+
+CHIP MDMux8Way{
+	IN in, sel[3];
+	OUT a, b, c, d, e, f, g, h;
+	PARTS:
+	MDMux(in = in, sel = sel[2], a = inabcd, b = inefgh);
+	MDMux4Way(in = inabcd, sel = sel[0..1], a = a, b = b, c = c, d = d);
+	MDMux4Way(in = inefgh, sel = sel[0..1], a = e, b = f, c = g, d = h);
+} 

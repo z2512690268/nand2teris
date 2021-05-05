@@ -1,0 +1,321 @@
+int mult(int x, int y) {
+	int sum;
+	sum = 0;
+	for (int j = y; j != 0; j--)
+		sum += x;
+	return sum;
+}
+
+function mult
+	args x, y
+	vars sum, j
+	sum = 0
+	j = y
+loop:
+	if j=0 goto end
+	sum = sum + x
+	j = j - 1
+	goto loop
+end:
+	return sum
+
+function mult(x, y)
+	push 0
+	pop sum
+	push y
+	pop j
+label loop
+	push 0
+	push j
+	eq
+	if-goto end
+	push sum
+	push x
+	add
+	pop sum
+	push j
+	push 1
+	sub
+	pop j
+	goto loop
+label end
+	push sum
+	return
+
+function mult 2
+	push constant 0
+	pop local 0
+	push argument 1
+	pop a
+
+push --  (1) constant
+			push constant x :
+			@x
+			D = A
+			@SP
+			M = M + 1
+			A = M - 1
+			M = D
+
+		 (2) pointer temp
+		 	push pointer x :
+		 	@(3 + x)
+		 	D = M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+
+		 	push temp x :
+		 	@(5 + x)
+		 	D = M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+
+		 (3) local argument this that
+		 	push local x :
+		 	@x
+		 	D = A
+		 	@LCL
+		 	A = D + M
+		 	D = M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+
+		 	push argument x :
+		 	@x
+		 	D = A
+		 	@ARG
+		 	A = D + M
+		 	D = M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+
+		 	push this x :
+		 	@x
+		 	D = A
+		 	@THIS
+		 	A = D + M
+		 	D = M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+
+			push that x :
+		 	@x
+		 	D = A
+		 	@THAT
+		 	A = D + M
+		 	D = M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+
+		 (4) static 
+		 	push static x :
+		 	@Xxx.x
+		 	D = A
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+
+pop -- (1) pointer temp
+			pop pointer x:
+			@SP
+			AM = M - 1
+			D = M
+			@(3 + x)
+			M = D
+
+			pop temp x:
+			@SP
+			AM = M - 1
+			D = M
+			@(5 + x)
+			M = D
+
+		(2) local argument this that
+			pop local x:
+			@LCL
+			D = M
+			@x
+			A = D + A
+			@R13
+			M = A
+			@SP
+			AM = M - 1
+			D = M
+			@R13
+			A = M
+			M = D
+
+			pop argument x:
+			@ARG
+			D = M
+			@x
+			A = D + A
+			@R13
+			M = A
+			@SP
+			AM = M - 1
+			D = M
+			@R13
+			A = M
+			M = D
+
+		(3) Static
+			pop Static x:
+			@SP
+			AM = M - 1
+			D = M
+			@Xxx.x
+			M = D
+					
+arimethtic:
+		(1) add
+			@SP
+			AM = M - 1
+			D = M
+			@SP
+			AM = M - 1
+			D = D + M
+			@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+		 (2) sub
+		 	@SP
+			AM = M - 1
+			D = M
+			@SP
+			AM = M - 1
+			D = M - D
+			@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+		 (3) neg
+		 	@SP
+		 	AM = M - 1
+		 	D = -M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+		 (4) and
+		 	@SP
+		 	AM = M - 1
+		 	D = M
+		 	@SP
+		 	AM = M - 1
+		 	D = D & M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+		 (5) or
+		 	@SP
+		 	AM = M - 1
+		 	D = M
+		 	@SP
+		 	AM = M - 1
+		 	D = D | M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+		 (6) not
+		 	@SP
+		 	AM = M - 1
+		 	D = !M
+		 	@SP
+		 	M = M + 1
+		 	A = M - 1
+		 	M = D
+		 (7) EQ
+		 	begin:
+
+			@SP
+			AM=M-1
+			D=M
+			A=A-1
+			D=M-D
+			M=0
+			@END_EQ_x
+			D;JNE
+			@SP
+			A=M-1
+			M=-1
+			(END_EQ_x)
+
+		(8) LT:
+			@SP
+			AM=M-1
+			D=M
+			A=A-1
+			D=M-D
+			M=0
+			@END_EQ_x
+			D;JGE
+			@SP
+			A=M-1
+			M=-1
+			(END_LT_x)
+		(9) GT:
+			@SP
+			AM=M-1
+			D=M
+			A=A-1
+			D=M-D
+			M=0
+			@END_GT_x
+			D;JLE
+			@SP
+			A=M-1
+			M=-1
+			(END_EQ_x)
+
+compare commands:
+		fout << "// EQ command" << endl;
+		fout << "@SP" << endl;
+		fout << "AM = M - 1" << endl;
+		fout << "D = M" << endl;
+		fout << "A = A - 1" << endl;
+		fout << "D = M - D" << endl;
+		fout << "M = 0" << endl;
+		fout << "@R15" << endl;
+		fout << "A = M" << endl;
+		fout << "D ; JNE" << endl;
+		fout << "@SP" << endl;
+		fout << "A = M - 1" << endl;
+		fout << "M = -1" << endl;
+		fout << "@R15" << endl;
+		fout << "A = M" << endl;
+		fout << "0 ; JMP" << endl;
+		fout << "// LT command" << endl;
+		fout << "@SP" << endl;
+		fout << "AM = M - 1" << endl;
+		fout << "D = M" << endl;
+		fout << "A = A - 1" << endl;
+		fout << "D = M - D" << endl;
+		fout << "M = 0" << endl;
+		fout << "@R15" << endl;
+		fout << "A = M" << endl;
+		fout << "D ; JLE" << endl;
+		fout << "@SP" << endl;
+		fout << "A = M - 1" << endl;
+		fout << "M = -1" << endl;
+		fout << "@R15" << endl;
+		fout << "A = M" << endl;
+		fout << "0 ; JMP" << endl;
+		fout << "// GT command" << endl;
+

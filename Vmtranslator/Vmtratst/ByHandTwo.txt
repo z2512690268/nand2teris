@@ -1,0 +1,165 @@
+Label Xxx:
+	(File.Func$Xxx)
+
+goto Xxx:
+	@File.Func$Xxx
+	0 ; JMP
+
+if-goto Xxx:
+	@SP
+	AM = M - 1
+	D = M
+	@File.Func$Xxx
+	D ; JNE
+
+call f n:
+new:
+	@RET_CALL_CallCnt ;
+	D = A ;
+	@SP ;
+	M = M + 1 ;
+	A = M - 1 ;
+	M = D ;	 
+	WritePush("segment", "LCL");
+	WritePush("segment", "ARG");
+	WritePush("segment", "THIS");
+	WritePush("segment", "THAT");
+	fout << "@SP" << endl;
+	fout << "D = M" << endl;
+	fout << "@LCL" << endl;
+	fout << "M = D" << endl;
+	fout << "@" << numArgs << endl;
+	fout << "D = D - A" << endl; 
+	fout << "@5" << endl;
+	fout << "D = D - A" << endl;
+	fout << "@ARG" << endl;
+	fout << "M = D" << endl;
+	@funcname 
+	0 ; JMP 
+	(RET_CALL_CallCnt) 
+
+	***************************************************
+old:
+	@RET_CALLy
+	WritePush("constant", "RET_CALLy");
+	WritePush("segment", "LCL");
+	WritePush("segment", "ARG");
+	WritePush("segment", "THIS");
+	WritePush("segment", "THAT");
+	WritePush("segment", "SP");
+	WritePush("constant", Arg2());
+	WriteAri("sub");
+	WritePush("constant", "5");
+	WriteAri("sub");
+	WritePop("segment", "ARG");
+	@SP
+	D = M
+	@LCL
+	M = D
+	goto f
+	(RET_CALLy)
+
+function f k:
+	(File.Func)
+	int times = atoi(k.c_str());
+	while(k--)	WritePush("constant", 0);
+
+Return:
+Begin:
+	WritePop("argument", "0");
+	WritePush("segment", "Arg");
+	WritePush("constant", "1");
+	add
+	WritePush("segment", "R13");
+	@LCL
+	D = M
+	@SP
+	M = D
+	WritePop("segment", "THAT");
+	WritePop("segment", "THIS");
+	WritePop("segment", "ARG");
+	WritePop("segment", "LCL");
+	WritePop("segment", "R14");
+	@R13
+	D = M
+	@SP
+	M = D
+	@R14
+	0 ; JMP
+
+old:
+fout << "@LCL" << endl;
+		fout << "D = M" << endl;
+		fout << "@5" << endl;
+		fout << "A = D - A" << endl;
+		fout << "D = M" << endl;
+		fout << "@R15" << endl;
+		fout << "M = D" << endl;
+		WritePop("argument", "0");
+		fout << "@ARG" << endl;
+		fout << "D = M + 1" << endl;
+		fout << "@R14" << endl;
+		fout << "M = D" << endl;
+		fout << "@LCL" << endl;
+		fout << "D = M" << endl;
+		fout << "@SP" << endl;
+		fout << "M = D" << endl;
+		WritePop("segment", "THAT");
+		WritePop("segment", "THIS");
+		WritePop("segment", "ARG");
+		WritePop("segment", "LCL");
+		fout << "@R14" << endl;
+		fout << "D = M" << endl;
+		fout << "@SP" << endl;
+		fout << "M = D" << endl;
+		fout << "@R15" << endl;
+		fout << "A = M" << endl;
+		fout << "0 ; JMP" << endl;
+	
+
+new:
+	fout << "@LCL" << endl;
+	fout << "D = M" << endl;
+	fout << "@R14" << endl;
+	fout << "M = D" << endl;
+	
+	fout << "@SP" << endl;
+	fout << "A = M - 1" << endl;
+	fout << "D = M" << endl;
+	fout << "@ARG" << endl;
+	fout << "M = D" << endl;
+
+	fout << "@ARG" << endl;
+	fout << "D = M + 1" << endl;
+	fout << "@SP" << endl;
+	fout << "M = D" << endl;
+
+	fout << "@R14" << endl;
+	fout << "AM = M - 1" << endl;
+	fout << "D = M" << endl;
+	fout << "@THAT" << endl;
+	fout << "M = D" << endl;
+	//pop that
+	fout << "@R14" << endl;
+	fout << "AM = M - 1" << endl;
+	fout << "D = M" << endl;
+	fout << "@THIS" << endl;
+	fout << "M = D" << endl;
+	//pop this
+	fout << "@R14" << endl;
+	fout << "AM = M - 1" << endl;
+	fout << "D = M" << endl;
+	fout << "@ARG" << endl;
+	fout << "M = D" << endl;
+	//pop arg
+	fout << "@R14" << endl;
+	fout << "AM = M - 1" << endl;
+	fout << "D = M" << endl;
+	fout << "@LCL" << endl;
+	fout << "M = D" << endl;
+	//pop lcl
+	fout << "@R14" << endl;
+	fout << "AM = M - 1" << endl;
+	fout << "A = M" << endl;
+	//pop ret
+	fout << "0 ; JMP" << endl;

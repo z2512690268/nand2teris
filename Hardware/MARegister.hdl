@@ -1,0 +1,25 @@
+// Name : MARegister.hdl
+// INPUT : in[16], load
+// OUTPUT : out[16]
+// FUNC : out(t) = load(t-1) ? in(t-1) : out(t-1)
+CHIP MARegister {
+	IN in[16], load;
+	OUT out[16];
+	PARTS:
+	MBit(in = in[0], load = load, out = out[0]);
+	MBit(in = in[1], load = load, out = out[1]);
+	MBit(in = in[2], load = load, out = out[2]);
+	MBit(in = in[3], load = load, out = out[3]);
+	MBit(in = in[4], load = load, out = out[4]);
+	MBit(in = in[5], load = load, out = out[5]);
+	MBit(in = in[6], load = load, out = out[6]);
+	MBit(in = in[7], load = load, out = out[7]);
+	MBit(in = in[8], load = load, out = out[8]);
+	MBit(in = in[9], load = load, out = out[9]);
+	MBit(in = in[10], load = load, out = out[10]);
+	MBit(in = in[11], load = load, out = out[11]);
+	MBit(in = in[12], load = load, out = out[12]);
+	MBit(in = in[13], load = load, out = out[13]);
+	MBit(in = in[14], load = load, out = out[14]);
+	MBit(in = in[15], load = load, out = out[15]);
+}

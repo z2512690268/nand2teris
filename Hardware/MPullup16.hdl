@@ -1,0 +1,24 @@
+// Name : MPullup16.hdl
+// INPUT : void
+// OUTPUT : out[16]
+// FUNC : out[i] = true
+CHIP MPullup {
+	OUT out[16];
+	PARTS:
+	Nand(a = false, b = false, out = out[0]);
+	Nand(a = false, b = false, out = out[1]);
+	Nand(a = false, b = false, out = out[2]);
+	Nand(a = false, b = false, out = out[3]);
+	Nand(a = false, b = false, out = out[4]);
+	Nand(a = false, b = false, out = out[5]);
+	Nand(a = false, b = false, out = out[6]);
+	Nand(a = false, b = false, out = out[7]);
+	Nand(a = false, b = false, out = out[8]);
+	Nand(a = false, b = false, out = out[9]);
+	Nand(a = false, b = false, out = out[10]);
+	Nand(a = false, b = false, out = out[11]);
+	Nand(a = false, b = false, out = out[12]);
+	Nand(a = false, b = false, out = out[13]);
+	Nand(a = false, b = false, out = out[14]);
+	Nand(a = false, b = false, out = out[15]);
+}

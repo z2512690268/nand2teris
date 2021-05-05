@@ -1,0 +1,25 @@
+// Name : MWire16.hdl
+// INPUT : in[16]
+// OUTPUT : out[16]
+// FUNC : out = in
+CHIP MWire16 {
+	IN in[16];
+	OUT out[16];
+	PARTS:
+	MAnd(a = in[0], b = true, out = out[0]);
+	MAnd(a = in[1], b = true, out = out[1]);
+	MAnd(a = in[2], b = true, out = out[2]);
+	MAnd(a = in[3], b = true, out = out[3]);
+	MAnd(a = in[4], b = true, out = out[4]);
+	MAnd(a = in[5], b = true, out = out[5]);
+	MAnd(a = in[6], b = true, out = out[6]);
+	MAnd(a = in[7], b = true, out = out[7]);
+	MAnd(a = in[8], b = true, out = out[8]);
+	MAnd(a = in[9], b = true, out = out[9]);
+	MAnd(a = in[10], b = true, out = out[10]);
+	MAnd(a = in[11], b = true, out = out[11]);
+	MAnd(a = in[12], b = true, out = out[12]);
+	MAnd(a = in[13], b = true, out = out[13]);
+	MAnd(a = in[14], b = true, out = out[14]);
+	MAnd(a = in[15], b = true, out = out[15]);
+}

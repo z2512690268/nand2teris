@@ -1,0 +1,10 @@
+// Name : MWire.hdl
+// INPUT : in
+// OUTPUT : out
+// FUNC : out = in
+CHIP MWire {
+	IN in;
+	OUT out;
+	PARTS:
+	MAnd(a = in, b = true, out = out);
+}

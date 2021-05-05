@@ -1,0 +1,26 @@
+// Name : MBuf16.hdl
+// INPUT : in
+// OUTPUT : out[16]
+// FUNC : assign out[16] with in
+
+CHIP MBuf16{
+	IN in;
+	OUT out[16];
+	PARTS:
+	MAnd(a = in, b = true, out = out[0]);
+	MAnd(a = in, b = true, out = out[1]);
+	MAnd(a = in, b = true, out = out[2]);
+	MAnd(a = in, b = true, out = out[3]);
+	MAnd(a = in, b = true, out = out[4]);
+	MAnd(a = in, b = true, out = out[5]);
+	MAnd(a = in, b = true, out = out[6]);
+	MAnd(a = in, b = true, out = out[7]);
+	MAnd(a = in, b = true, out = out[8]);
+	MAnd(a = in, b = true, out = out[9]);
+	MAnd(a = in, b = true, out = out[10]);
+	MAnd(a = in, b = true, out = out[11]);
+	MAnd(a = in, b = true, out = out[12]);
+	MAnd(a = in, b = true, out = out[13]);
+	MAnd(a = in, b = true, out = out[14]);
+	MAnd(a = in, b = true, out = out[15]);
+}
